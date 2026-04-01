@@ -1421,11 +1421,22 @@ img {
   letter-spacing: 0.14em;
   font-weight: 700;
   backdrop-filter: blur(20px);
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s var(--ease);
 }
 
 body.menu-open .mobile-book,
 body.modal-open .mobile-book {
   opacity: 0;
+  pointer-events: none;
+}
+
+.mobile-book.is-hidden {
+  opacity: 0;
+  transform: translateY(1rem);
   pointer-events: none;
 }
 

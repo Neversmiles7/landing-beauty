@@ -18,6 +18,8 @@ const reviewCards = [...document.querySelectorAll(".review-card")];
 const reviewsDots = document.querySelector(".reviews__dots");
 const reviewPrev = document.querySelector("[data-review-prev]");
 const reviewNext = document.querySelector("[data-review-next]");
+const mobileBookButton = document.querySelector(".mobile-book");
+const heroPrimaryButton = document.querySelector(".hero .button--primary");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 let activeModalTrigger = null;
@@ -315,6 +317,47 @@ const setupAnchors = () => {
   });
 };
 
+const setupMobileBookVisibility = () => {
+  if (!mobileBookButton || !heroPrimaryButton || !("IntersectionObserver" in window)) return;
+
+  const mobileQuery = window.matchMedia("(max-width: 61.9375rem)");
+
+  const syncVisibility = (isHeroButtonVisible) => {
+    if (!mobileQuery.matches) {
+      mobileBookButton.classList.remove("is-hidden");
+      return;
+    }
+
+    mobileBookButton.classList.toggle("is-hidden", isHeroButtonVisible);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const entry = entries[0];
+      syncVisibility(Boolean(entry?.isIntersecting));
+    },
+    {
+      threshold: 0.35,
+    }
+  );
+
+  observer.observe(heroPrimaryButton);
+
+  const handleViewportChange = () => {
+    if (!mobileQuery.matches) {
+      mobileBookButton.classList.remove("is-hidden");
+      return;
+    }
+
+    const rect = heroPrimaryButton.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    syncVisibility(isVisible);
+  };
+
+  handleViewportChange();
+  mobileQuery.addEventListener("change", handleViewportChange);
+};
+
 navToggle?.addEventListener("click", toggleMenu);
 
 navLinks.forEach((link) => {
@@ -359,3 +402,4 @@ setupModal();
 setupReviews();
 setupFaq();
 setupAnchors();
+setupMobileBookVisibility();
