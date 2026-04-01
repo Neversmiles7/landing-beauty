@@ -152,8 +152,10 @@ img {
 }
 
 .section-heading {
-  max-width: 44rem;
-  margin-bottom: 2.25rem;
+  display: grid;
+  gap: 0.95rem;
+  max-width: 39rem;
+  margin-bottom: 2.6rem;
 }
 
 .section-heading h2,
@@ -182,8 +184,17 @@ img {
 }
 
 .section-heading p {
-  margin: 1rem 0 0;
-  max-width: 38rem;
+  margin: 0;
+  max-width: 32rem;
+  font-size: 0.98rem;
+}
+
+.section-heading::after {
+  content: "";
+  width: 5rem;
+  height: 1px;
+  margin-top: 0.25rem;
+  background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
 }
 
 .button {
@@ -512,18 +523,29 @@ img {
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 2.6rem;
+  gap: 3.1rem;
   align-items: center;
 }
 
 .hero__content {
-  max-width: 38rem;
+  position: relative;
+  max-width: 35rem;
+  padding: 1rem 0 1.35rem;
+}
+
+.hero__content::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -1.2rem;
+  width: 1px;
+  background: linear-gradient(180deg, transparent 0%, rgba(184, 155, 112, 0.5) 20%, transparent 100%);
+  opacity: 0.65;
 }
 
 .hero__signature {
-  margin: 0 0 1rem;
-  font-size: 0.92rem;
-  letter-spacing: 0.22em;
+  margin: 0 0 1.2rem;
+  font-size: 0.88rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--text-soft);
 }
@@ -538,23 +560,34 @@ img {
 }
 
 .hero__lead {
-  margin: 1.3rem 0 0;
-  max-width: 34rem;
-  font-size: 1rem;
+  margin: 1.4rem 0 0;
+  max-width: 29rem;
+  font-size: 1.02rem;
 }
 
 .hero__actions {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
-  margin-top: 1.9rem;
+  margin-top: 2rem;
+}
+
+.hero__atelier-note {
+  margin: 1.1rem 0 0;
+  padding-top: 1rem;
+  max-width: 31rem;
+  border-top: 1px solid rgba(184, 155, 112, 0.16);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
 .hero__details {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
-  margin-top: 2rem;
+  margin-top: 1.2rem;
 }
 
 .hero__pill {
@@ -585,13 +618,56 @@ img {
 
 .hero__visual {
   position: relative;
-  min-height: 28rem;
+  min-height: 29.5rem;
+  padding: 1rem 0;
+  isolation: isolate;
+}
+
+.hero__visual::before {
+  content: "";
+  position: absolute;
+  inset: 2.2rem 0.4rem 3rem auto;
+  width: min(86%, 24rem);
+  border-radius: 2.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(10, 10, 11, 0.08) 100%);
+  transform: rotate(7deg);
+  z-index: 0;
+}
+
+.hero__visual::after {
+  content: "";
+  position: absolute;
+  inset: auto auto 2rem 8%;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184, 155, 112, 0.12) 0%, transparent 72%);
+  filter: blur(12px);
+  z-index: 0;
+}
+
+.hero__monogram {
+  position: absolute;
+  top: -0.2rem;
+  left: 0.15rem;
+  z-index: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(7rem, 24vw, 13rem);
+  font-weight: 600;
+  line-height: 0.78;
+  letter-spacing: 0.08em;
+  color: rgba(246, 238, 225, 0.04);
+  pointer-events: none;
 }
 
 .hero__visual-main {
   position: relative;
-  width: min(100%, 22rem);
+  z-index: 1;
+  width: min(100%, 22.75rem);
   margin-left: auto;
+  margin-right: 0.9rem;
 }
 
 .hero__visual-frame {
@@ -653,7 +729,7 @@ img {
     linear-gradient(145deg, rgba(184, 155, 112, 0.12) 0%, rgba(184, 155, 112, 0.04) 40%, rgba(5, 5, 6, 0.72) 100%),
     url("https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80");
   background-size: cover;
-  background-position: center;
+  background-position: center 24%;
   box-shadow: inset 0 -4rem 6rem rgba(0, 0, 0, 0.48);
   filter: saturate(0.7) contrast(1.05) brightness(0.9);
 }
@@ -695,6 +771,7 @@ img {
 
 .floating-card {
   position: absolute;
+  z-index: 1;
   padding: 1rem;
   border-radius: 1.3rem;
   border: 1px solid rgba(184, 155, 112, 0.18);
@@ -738,21 +815,21 @@ img {
 }
 
 .floating-card--stat {
-  left: 0;
-  bottom: -1.1rem;
-  max-width: 13.5rem;
+  left: 0.35rem;
+  bottom: 0.9rem;
+  max-width: 12.75rem;
 }
 
 .floating-card--badge {
-  top: 0.9rem;
-  right: 0;
-  max-width: 12rem;
+  top: 1rem;
+  right: 0.35rem;
+  max-width: 11.3rem;
 }
 
 .floating-card--mini {
-  right: -0.25rem;
-  bottom: 5.5rem;
-  max-width: 10.75rem;
+  right: 0.35rem;
+  bottom: 6.25rem;
+  max-width: 10rem;
 }
 
 .hero__scroll {
@@ -1081,7 +1158,7 @@ img {
 
 .about__grid {
   display: grid;
-  gap: 1.3rem;
+  gap: 1.6rem;
 }
 
 .about__lead {
@@ -1573,12 +1650,31 @@ body.modal-open .mobile-book {
     grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
   }
 
+  .hero__content {
+    padding-right: 1.8rem;
+  }
+
+  .hero__content::before {
+    inset: 0.5rem auto 0.5rem -1.5rem;
+  }
+
   .hero__visual {
     min-height: 37rem;
   }
 
+  .hero__visual::before {
+    inset: 2rem 0.8rem 3.2rem auto;
+    width: min(82%, 28rem);
+  }
+
+  .hero__visual::after {
+    width: 18rem;
+    height: 18rem;
+  }
+
   .hero__visual-main {
     width: min(100%, 31rem);
+    margin-right: 1.2rem;
   }
 
   .hero__visual-frame {
@@ -1591,6 +1687,15 @@ body.modal-open .mobile-book {
 
   .section-heading {
     margin-bottom: 3rem;
+  }
+
+  .services__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .service-card:nth-child(even) {
+    margin-top: 2rem;
   }
 
   .portfolio__grid {
@@ -1606,8 +1711,12 @@ body.modal-open .mobile-book {
     grid-column: span 2;
   }
 
-  .services__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .prices__grid {
+    align-items: start;
+  }
+
+  .price-card--featured {
+    margin-top: -1rem;
   }
 
   .mobile-book {
@@ -1633,17 +1742,17 @@ body.modal-open .mobile-book {
   }
 
   .floating-card--stat {
-    left: -1.75rem;
+    left: -0.9rem;
     bottom: 1.5rem;
   }
 
   .floating-card--badge {
-    right: -1rem;
+    right: -0.6rem;
     top: 1.5rem;
   }
 
   .floating-card--mini {
-    right: -1.4rem;
+    right: -0.9rem;
     bottom: 7.6rem;
   }
 
